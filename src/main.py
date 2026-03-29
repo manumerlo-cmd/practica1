@@ -1,0 +1,1 @@
+print("Proyecto práctica 1 iniciado")
