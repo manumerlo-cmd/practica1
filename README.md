@@ -1,2 +1,11 @@
-# practica2
-Repositorio para la Práctica 1 de la asignatura Tipología y ciclo de vida de los datos del Máster Universitario en Ciencia de Datos de la UOC. El proyecto desarrolla un proceso de web scraping en Python para extraer datos de un sitio web real, generar un dataset en formato CSV y documentar el procedimiento de recolección, almacenamiento y publicación de los datos.
+# Práctica 1
+## Autores
+Este proyecto ha sido realizado por:
+- Xaime...
+- Manuel Merlo Torrente
+## Descripción del proyecto
+El objetivo de esta práctica es diseñar y desarrollar un proceso de recolección de datos mediante técnicas de web scraping utilizando Python.
+
+Se obtendrán datos desde un sitio web, se procesarán y se generará un dataset estructurado en formato CSV. 
+
+## Estructura del repositorio
