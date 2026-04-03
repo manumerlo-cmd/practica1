@@ -1,7 +1,7 @@
 # Práctica 1
 ## Autores
 Este proyecto ha sido realizado por:
-- Xaime...
+- Xaime Ferrín Suárez
 - Manuel Merlo Torrente
 ## Descripción del proyecto
 El objetivo de esta práctica es diseñar y desarrollar un proceso de recolección de datos mediante técnicas de web scraping utilizando Python.
