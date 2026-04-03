@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 def get_subcategories(URL, headers):
     """
-    Obtiene las subcategorías de una página de categoria de Naturitas.
+      Obtiene las subcategorías de una página de categoria de Naturitas.
 
     Args:
         url (str): URL de la categoría principal.
