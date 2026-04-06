@@ -39,10 +39,21 @@ def get_subcategories(URL, headers):
 
 def get_product_links(subcat_url, headers):
     """
-    Para obtener los productos de cada subcategoría
-    Definimos una función que reciba la URL de cada subcategoría, extraiga los productos a través de las diferentes
-    páginas, añada pausas aleatorias para no saturar el servidor y que nos devuleva los productos en formato lista.
-    """
+        Extrae los enlaces de productos de una subcategoría de Naturitas.
+
+        La función navega por las distintas páginas de una subcategoría mediante
+        paginación, realiza peticiones HTTP con pausas entre solicitudes para
+        evitar sobrecargar el servidor y recopila las URLs de las fichas de
+        producto detectadas en cada página.
+
+        Parámetros:
+            subcat_url (str): Dirección web de la subcategoría.
+            headers (dict): Cabeceras HTTP utilizadas en la solicitud.
+
+        Devuelve:
+            list: Lista de URLs de productos encontradas en la subcategoría.
+            Si no se detectan productos, devuelve una lista vacía.
+        """
 
     product_links = []
     current_page = 1
