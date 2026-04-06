@@ -37,7 +37,7 @@ def get_product_links(subcat_url, headers):
 
 cards = soup.find_all("a", clas_="productt_card")
 if not cards:
-    print("No hay productos. Fin de la paginación"
+    print("No hay productos. Fin de la paginación")
     break
 for card in cards:
     href = card.get("href")
