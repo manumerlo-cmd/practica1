@@ -11,7 +11,13 @@ headers = {
 
 subcategorias = get_subcategories(URL, headers)
 
-subcat_url = "https://www.naturitas.es/c/suplementos/fitoterapia"
-get_product_links(subcat_url, headers)
+for subcat in subcategorias:
+    subcat_url = subcat["url"]
+    get_product_links(subcat_url, headers)
+
+#subcat_url = "https://www.naturitas.es/c/suplementos/carbon-activado"
+#pl = get_product_links(subcat_url, headers)
+#print(pl)
+
 
 

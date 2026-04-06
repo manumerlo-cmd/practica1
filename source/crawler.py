@@ -33,8 +33,7 @@ def get_subcategories(URL, headers):
         count_tag = parent_link.find("span", class_="count")
         count_tag = count_tag.get_text(strip=True)
         count = int(count_tag.replace("(", "").replace(")", ""))
-
-    subcategorias.append({"name": name, "href": href, "count": count})
+        subcategorias.append({"name": name, "url": href, "count": count})
 
     return subcategorias
 
@@ -48,9 +47,9 @@ def get_product_links(subcat_url, headers):
     product_links = []
     current_page = 1
     while True:
-        url = f"{subcat_url}?page={current_page}"
+        url = f"{subcat_url}?p={current_page}"
         print(f"Descargando página {current_page} : {url}")
-        time.sleep(random.uniform(0.8, 1.6))
+        #time.sleep(random.uniform(0.8, 1.6))
 
         response = requests.get(url, headers=headers)
 
@@ -59,16 +58,18 @@ def get_product_links(subcat_url, headers):
 
         soup = BeautifulSoup(response.content, "html.parser")
 
-        cards = soup.find_all("a", clas_="productt_card")
-        if not cards:
+        #links = soup.find_all("a", href=True)
+
+        links = soup.find_all("a", class_="product-item-link")
+        if not links:
             print("No hay productos. Fin de la paginación")
-        break
+            break
 
-        for card in cards:
-            href = card.get("href")
-            full_url = "https://www.naturitas.es" + href
-            product_links.append(full_url)
+        for link in links:
+            href = link.get("href")
+            product_links.append(href)
+            #print (full_url)
 
-            current_page += 1
+        current_page += 1
 
     return product_links
