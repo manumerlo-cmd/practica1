@@ -33,6 +33,8 @@ for subcat in subcategorias:
             print("{} ya procesado".format(producto))
         else:
             time.sleep(random.uniform(0.8, 1.6))
+            print("Procesado {}".format(producto))
             product = parse_product(producto,headers)
+            product["Subcategoria"] = subcategoria
             save_processed_url(producto, file_processed)
             append_to_csv(product, file)
