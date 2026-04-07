@@ -106,35 +106,10 @@ def get_product_details(product_url, headers):
     price_tag = soup.find("span", class_="price")
     data["price"] = price_tag.get_text(strip=True) if price_tag else None
 
-    # Precio anterior
-    old_price_tag = soup.find("span", class_="old-price")
-    data["old_price"] = old_price_tag.get_text(strip=True) if old_price_tag else None
-
     # Marca
     brand_tag = soup.find("a", class_="brand-name")
     data["brand"] = brand_tag.get_text(strip=True) if brand_tag else None
 
-    # Valoración
-    rating_tag = soup.find("span", class_="rating")
-    data["rating"] = rating_tag.get_text(strip=True) if rating_tag else None
 
-    # Número de opiniones
-    reviews_tag = soup.find("span", class_="reviews-count")
-    if reviews_tag:
-        data["reviews"] = reviews_tag.get_text(strip=True).replace("(", "").replace(")", "")
-    else:
-        data["reviews"] = None
-
-    # Disponibilidad
-    stock_tag = soup.find("span", class_="stock")
-    data["stock"] = stock_tag.get_text(strip=True) if stock_tag else None
-
-    # Descripción
-    desc_tag = soup.find("div", class_="product-description")
-    data["description"] = desc_tag.get_text(strip=True) if desc_tag else None
-
-    # Ingredientes
-    ing_tag = soup.find("div", class_="ingredients")
-    data["ingredients"] = ing_tag.get_text(strip=True) if ing_tag else None
 
     return data
