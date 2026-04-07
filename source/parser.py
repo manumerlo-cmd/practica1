@@ -1,5 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
+import csv
+import os
 
 def parse_product(url, headers):
     """
@@ -38,12 +40,6 @@ def parse_product(url, headers):
     "brand": brand,
     "sku": sku
 }
-
-import csv
-
-
-import csv
-import os
 
 
 def append_to_csv(data, filename):

@@ -16,8 +16,14 @@ def get_subcategories(URL, headers):
         list: Lista de diccionarios con el nombre, enlace y número de productos
         de cada subcategoría.
     """
-    response = requests.get(URL, headers=headers)
+
+    session = requests.Session()
+    session.headers.update(headers)
+    response = session.get(URL, headers=headers)
     print("Status: ", response.status_code)
+    print("Reponse", response.text)
+    soup = BeautifulSoup(response.content, "html.parser")
+    print("Buscando links de subcategorías...", end=" ")
     soup = BeautifulSoup(response.content, "html.parser")
     # Obtenemos todos los los links de productos de la página (etiqueta a, clase "product-item-link" con link)
     products_links = soup.find_all("a", class_="product-item-link", href=True)
@@ -34,7 +40,7 @@ def get_subcategories(URL, headers):
         count_tag = count_tag.get_text(strip=True)
         count = int(count_tag.replace("(", "").replace(")", ""))
         subcategorias.append({"name": name, "url": href, "count": count})
-
+    print("OK\n")
     return subcategorias
 
 def get_product_links(subcat_url, headers):
@@ -54,7 +60,7 @@ def get_product_links(subcat_url, headers):
             list: Lista de URLs de productos encontradas en la subcategoría.
             Si no se detectan productos, devuelve una lista vacía.
         """
-
+    print("Buscando links de productos...")
     product_links = []
     current_page = 1
     while True:
@@ -82,5 +88,5 @@ def get_product_links(subcat_url, headers):
             #print (full_url)
 
         current_page += 1
-
+    print("OK\n")
     return product_links
