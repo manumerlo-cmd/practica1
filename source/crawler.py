@@ -21,7 +21,6 @@ def get_subcategories(URL, headers):
     session.headers.update(headers)
     response = session.get(URL, headers=headers)
     print("Status: ", response.status_code)
-    print("Reponse", response.text)
     soup = BeautifulSoup(response.content, "html.parser")
     print("Buscando links de subcategorías...", end=" ")
     soup = BeautifulSoup(response.content, "html.parser")
@@ -66,7 +65,7 @@ def get_product_links(subcat_url, headers):
     while True:
         url = f"{subcat_url}?p={current_page}"
         print(f"Descargando página {current_page} : {url}")
-        #time.sleep(random.uniform(0.8, 1.6))
+        time.sleep(random.uniform(0.8, 1.6))
 
         response = requests.get(url, headers=headers)
 

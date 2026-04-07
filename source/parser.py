@@ -73,3 +73,33 @@ def append_to_csv(data, filename):
             writer.writeheader()
 
         writer.writerows(data)
+
+def load_processed_urls(filename):
+    """
+    Carga las URLs ya procesadas desde un archivo de texto.
+
+    Parámetros:
+        filename (str): Ruta del archivo con las URLs procesadas.
+
+    Devuelve:
+        set: Conjunto de URLs ya procesadas.
+    """
+    if not os.path.exists(filename):
+        return set()
+
+    with open(filename, "r", encoding="utf-8") as file:
+        return set(line.strip() for line in file if line.strip())
+
+def save_processed_url(url, filename):
+    """
+    Guarda una URL procesada en un archivo de texto.
+
+    Parámetros:
+        url (str): URL ya procesada.
+        filename (str): Ruta del archivo donde registrar la URL.
+
+    Devuelve:
+        None
+    """
+    with open(filename, "a", encoding="utf-8") as file:
+        file.write(url + "\n")
