@@ -103,9 +103,9 @@ dataset/processed_urls.txt
  [Extraer Subcategorías]
            |
            v
-   ┌─────────────────────┐
+   ┌────────────────────────┐
    │ Para cada subcategoría │
-   └─────────────────────┘
+   └────────────────────────┘
            |
            v
  [Obtener páginas (?p=1,2,...)]
