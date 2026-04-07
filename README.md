@@ -1,4 +1,4 @@
-# Práctica 1 – Web Scraping Naturitas
+# Práctica 1 –  Web Scraping Naturitas
 
 ## Introducción
 
