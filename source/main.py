@@ -5,8 +5,8 @@ import random
 
 # Definimos url de partida y ruta del archivo csv, ruta archivo de url procesadas
 # (para retomar si se rompe el flujo) y header
-#URL = "https://www.naturitas.es/c/suplementos"
-URL = "https://www.naturitas.es/c/mama-y-bebe"
+URL = "https://www.naturitas.es/c/suplementos"
+#URL = "https://www.naturitas.es/c/mama-y-bebe"
 file = r".\dataset\data.csv"
 file_processed = r".\dataset\processed.csv"
 headers = {
