@@ -97,7 +97,7 @@ def get_product_links(subcat_url, headers, processed_pages_file):
         save_processed_item(page_url, processed_pages_file)
         processed_pages.add(page_url)
 
-        time.sleep(random.uniform(1.5, 3.0))
+        time.sleep(random.uniform(0.6,1.2 ))
         current_page += 1
 
     product_links = list(dict.fromkeys(product_links))
@@ -198,7 +198,7 @@ def process_subcategory_pages(
                 continue
 
             try:
-                time.sleep(random.uniform(1.0, 2.5))
+                time.sleep(random.uniform(0.6, 1.2))
 
                 product_data = parse_product(product_url, headers)
 
@@ -228,5 +228,5 @@ def process_subcategory_pages(
         else:
             print(f"Página no marcada como completada: {page_url}")
 
-        time.sleep(random.uniform(1.5, 3.0))
+        time.sleep(random.uniform(0.6, 1.2))
         current_page += 1
