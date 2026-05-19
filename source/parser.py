@@ -28,17 +28,89 @@ def parse_product(url, headers):
     price_element = soup.find("span", attrs={"data-price-type": "finalPrice"})
     price = price_element["data-price-amount"] if price_element else None
 
+    old_price_element = soup.find("span", attrs={"data-price-type": "msrpPrice"})
+    old_price = old_price_element.get("data-price-amount") if old_price_element else None
+
     brand_element = soup.find("div", class_="product-brand")
     brand = brand_element.get_text(strip=True) if brand_element else None
 
     form_element = soup.find("form", id="product_addtocart_form")
     sku = form_element["data-product-sku"] if form_element else None
 
+    presentation_element = soup.find("div", class_="product__presentation")
+    presentation = presentation_element.get_text(strip=True) if presentation_element else None
+
+    rating_element = soup.find("div", class_="product-reviews-summary-rating")
+    rating_percent = rating_element.get("title") if rating_element else None
+
+    review_element = soup.find("a", class_="product-reviews-summary-link")
+    review_count = review_element.get_text(strip=True).split()[0] if review_element else None
+
+    question_element = soup.find("a", class_="product-questions-summary-link")
+    question_count = question_element.get_text(strip=True).split()[0] if question_element else None
+
+    # Estado de stock
+    stock_element = soup.find("div", class_="stock available product-available")
+    stock_status = stock_element.get_text(strip=True) if stock_element else None
+
+    # Longitud de la descripción
+    description_element = soup.find("div", class_="product-short-description-text")
+    description = description_element.get_text(" ", strip=True) if description_element else None
+    description_length = len(description) if description else None
+
+    seal_elements = soup.find_all("li", class_="product-seals-item")
+    seals = []
+    for seal in seal_elements:
+        tooltip = seal.find("div", class_="product-seals-item-tooltip")
+        if tooltip:
+            tooltip.extract()
+        seal_text = seal.get_text(strip=True)
+        if seal_text:
+            seals.append(seal_text)
+    seals = "|".join(seals) if seals else None
+
+    tier_elements = soup.find_all("li", class_="tier-discount-tab")
+    tier_prices_list = []
+    for tier in tier_elements:
+        qty = tier.get("data-qty-discount")
+        price = tier.get("data-discount-value")
+
+        if qty and price:
+            tier_prices_list.append(f"{qty}:{price}")
+    tier_prices = "|".join(tier_prices_list) if tier_prices_list else None
+
+    rating_distribution = {
+        "rating_5_count": 0,
+        "rating_4_count": 0,
+        "rating_3_count": 0,
+        "rating_2_count": 0,
+        "rating_1_count": 0
+    }
+
+    rating_items = soup.find_all("div", class_="customer-reviews-filter-item-action")
+    for item in rating_items:
+        stars = item.get("data-filter")
+        subtotal = item.get("data-subtotal")
+        if stars and subtotal:
+            key = f"rating_{stars}_count"
+            rating_distribution[key] = subtotal
+
     return {
     "name": name,
     "price": price,
     "brand": brand,
-    "sku": sku
+    "sku": sku,
+    "old_price": old_price,
+    "presentation": presentation,
+    "rating_percent": rating_percent,
+    "review_count": review_count,
+    "question_count": question_count,
+    "stock_status": stock_status,
+    "description_length": description_length,
+    "seals": seals,
+    "tier_prices": tier_prices,
+    **rating_distribution
+
 }
 
 
